@@ -1,0 +1,148 @@
+from tkinter import *
+import matplotlib.pyplot as plt
+import numpy as np
+from pylab import plot, show, xlabel, ylabel
+from tkinter import messagebox
+import math
+
+
+x=0
+myw=Tk()
+myw.geometry('300x300')
+myw.configure(bg='yellow')
+myw.title('Graph Plotter')
+myvar=IntVar()
+
+# TRIGNOMETRY
+mymenu=Menu(myw)
+myw.config(menu=mymenu)
+trigmenu=Menu(mymenu)
+mymenu.add_cascade(label='trignometry',menu=trigmenu)
+trigmenu.add_command(label='Sinx',command=lambda:LoadSinGraph())
+trigmenu.add_command(label='cosx',command=lambda:LoadCosGraph())
+trigmenu.add_command(label='Tanx',command=lambda:LoadTanGraph())
+trigmenu.add_separator()
+trigmenu.add_command(label='Cosecx')
+trigmenu.add_command(label='secx')
+trigmenu.add_command(label='cotx')
+
+# EXPONENTIAL
+expmenu=Menu(mymenu)
+mymenu.add_cascade(label='Exponential',menu=expmenu)
+expmenu.add_command(label='Show',command=lambda:LoadExponGraph())
+
+
+#AlGEBRAIC
+algmenu=Menu(mymenu)
+mymenu.add_cascade(label='Algebraic',menu=algmenu)
+algmenu.add_command(label='Show',command=lambda:LoadAlgGraph())
+
+#LOGARITHM 
+logmenu=Menu(mymenu)
+mymenu.add_cascade(label='Logarithm',menu=logmenu)
+logmenu.add_command(label='Show',command=lambda:LoadLogGraph())
+
+#PIECHART
+piemenu=Menu(mymenu)
+mymenu.add_cascade(label='PieChart',menu=piemenu)
+piemenu.add_command(label='Show',command=lambda:LoadPieGraph())
+
+
+
+def LoadSinGraph():
+    t = np.arange(0.0, 24, 0.01)
+    s = np.sin(t)
+    fig, ax = plt.subplots()
+    ax.plot(t, s)
+    ax.set(xlabel='radians', ylabel='Sin(x)',
+       title='Sine Plot')
+    ax.grid()
+
+    plt.show()
+    
+def LoadCosGraph():
+                
+
+    t = np.arange(0.0, 24, 0.01)
+    s = np.cos(t)
+    fig, ax = plt.subplots()
+    ax.plot(t, s)
+    ax.set(xlabel='radians', ylabel='(cosx)',
+    title='Cosine Plot')
+    ax.grid()
+    plt.show()
+def LoadTanGraph():
+    t = np.arange(0.0, 1, 0.01)
+    s = np.tan(t)
+    fig, ax = plt.subplots()
+    ax.plot(t, s)
+    ax.set(xlabel='radians', ylabel='tan(x)',
+       title='Tangent Plot')
+    ax.grid()
+    plt.show()
+
+def LoadExponGraph():
+                   
+    x= np.array([1,3,5])
+    y=[2,4,6]
+    z=np.exp(x)
+    w=np.exp(y)
+    plt.plot(x,z,color="blue",marker='*')
+    plt.plot(y,w,color="red",marker='o')
+    plt.xlabel("X Axis--------->")
+    plt.ylabel("Y Axis--------->")
+    plt.title("Exponential")
+    plt.show()
+
+
+def LoadLogGraph():            
+                   
+    x = np.linspace(0.001, 16, 2000)
+    y_e = np.log(x)
+    y_10 = np.log10(x)
+    y_2 = np.log2(x)
+
+    plt.plot(x, y_e)
+    plt.plot(x, y_10)
+    plt.plot(x, y_2)
+    plt.title("Log Graph")
+    plt.legend(['ln', 'log10', 'log2'], loc='lower right')
+    plt.xticks(range(math.floor(min(x)), math.ceil(max(x))+1))
+    plt.axhline(0, color='black', linewidth='0.5')
+    plt.axvline(0, color='black', linewidth='0.5')            
+                   
+def LoadPieGraph():
+    
+    cars = ['AUDI', 'BMW', 'FORD', 
+        'TESLA', 'JAGUAR', 'MERCEDES'] 
+
+    data = []
+    for i in range(0,6):
+        print(cars[i])
+        dt=int(input("Enter data: "))
+        data.append(dt)
+    print(data)    
+  
+   # Creating plot 
+    fig = plt.figure(figsize =(10, 7)) 
+    plt.pie(data, labels = cars)
+    plt.title("Pie Chart")
+  
+     # show plot 
+    plt.show() 
+
+def LoadAlgGraph():
+    # Creating vectors X and Y 
+    x = np.linspace(-2, 2, 100) 
+    y = x ** 2
+  
+    fig = plt.figure(figsize = (10, 5)) 
+# Create the plot 
+    plt.plot(x, y) 
+    plt.title("y=x^2")
+ # Show the plot 
+    plt.show() 
+    
+
+
+mainloop()
